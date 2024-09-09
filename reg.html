@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+
+  <style>
+    .tt {
+      font-size: 3vh;
+      font-weight: bold;
+    }
+
+    body {
+    background-color: #f8f9fa; /* Light background color */
+    font-family: Arial, sans-serif; /* Font style */
+}
+
+.registration-form {
+    max-width: 600px; /* Maximum width of the form */
+    margin: 50px auto; /* Center the form */
+    padding: 20px; /* Padding around the form */
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.form-title {
+    text-align: center; /* Center the title */
+    font-size: 2rem; /* Font size for the title */
+    color: #343a40; /* Darker text color for the title */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+.input-group {
+    display: flex; /* Flexbox for input group */
+    justify-content: space-between; /* Space between inputs */
+}
+
+.form-control {
+    flex: 1; /* Allow inputs to grow */
+    margin-right: 10px; /* Space between inputs */
+    border: 1px solid #ced4da; /* Border color for inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+    padding: 10px; /* Padding inside inputs */
+}
+
+.form-control:last-child {
+    margin-right: 0; /* Remove margin for the last input */
+}
+
+.form-select {
+    width: 100%; /* Full width for select elements */
+    border: 1px solid #ced4da; /* Border color for select elements */
+    border-radius: 4px; /* Rounded corners for select elements */
+    padding: 10px; /* Padding inside select elements */
+    margin-top: 20px; /* Space above select elements */
+}
+
+.btn {
+    width: 100%; /* Full width for the button */
+    background-color:#6E8D33; /* Primary button color */
+    border: none; /* No border */
+    color: white; /* Text color */
+    padding: 10px; /* Padding inside button */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 20px; /* Space above button */
+}
+
+.btn:hover {
+    background-color: #a0cb51; /* Darker color on hover */
+}
+
+.mb-1, .mb-3 {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+
+.row.align-items-center {
+    align-items: center; /* Vertically center the items in the row */
+}
+
+.btn {
+    width: 100%; /* Make the button take the full width of the column */
+}
+
+
+  </style>
+  <script>
+        const stateDistricts = {
+        'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Tirupati', 'Guntur'],
+        'Arunachal Pradesh': ['Itanagar', 'Naharlagun', 'Tawang', 'Ziro'],
+        'Assam': ['Guwahati', 'Dibrugarh', 'Jorhat', 'Silchar'],
+        'Bihar': ['Patna', 'Gaya', 'Bhagalpur', 'Muzzafarpur'],
+        'Chhattisgarh': ['Raipur', 'Bilaspur', 'Durg', 'Korba'],
+        'Goa': ['Panaji', 'Margao', 'Vasco da Gama', 'Mapusa'],
+        'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot'],
+        'Haryana': ['Chandigarh', 'Faridabad', 'Gurgaon', 'Ambala'],
+        'Himachal Pradesh': ['Shimla', 'Dharamshala', 'Manali', 'Kullu'],
+        'Jharkhand': ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro'],
+        'Karnataka': ['Bengaluru', 'Mysuru', 'Hubli', 'Dharwad'],
+        'Kerala': ['Thiruvananthapuram', 'Kochi', 'Kottayam', 'Kozhikode'],
+        'Madhya Pradesh': ['Bhopal', 'Indore', 'Gwalior', 'Jabalpur'],
+        'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Aurangabad'],
+        'Manipur': ['Imphal', 'Thoubal', 'Churachandpur', 'Ukhrul'],
+        'Meghalaya': ['Shillong', 'Tura', 'Jowai', 'Williamnagar'],
+        'Mizoram': ['Aizawl', 'Lunglei', 'Champhai', 'Serchhip'],
+        'Nagaland': ['Kohima', 'Dimapur', 'Mokokchung', 'Wokha'],
+        'Odisha': ['Bhubaneswar', 'Cuttack', 'Rourkela', 'Sambalpur'],
+        'Punjab': ['Chandigarh', 'Amritsar', 'Jalandhar', 'Ludhiana'],
+        'Rajasthan': ['Jaipur', 'Udaipur', 'Jodhpur', 'Kota'],
+        'Sikkim': ['Gangtok', 'Namchi', 'Pelling', 'Yuksom'],
+        'Tamil Nadu': ['Chennai', 'Coimbatore', 'Madurai', 'Salem'],
+        'Telangana': ['Hyderabad', 'Warangal', 'Nizamabad', 'Khammam'],
+        'Tripura': ['Agartala', 'Udaipur', 'Dharmanagar', 'Kailashahar'],
+        'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Agra', 'Varanasi'],
+        'Uttarakhand': ['Dehradun', 'Haridwar', 'Nainital', 'Rudrapur'],
+        'West Bengal': ['Kolkata', 'Siliguri', 'Durgapur', 'Asansol']
+};
+
+
+function getDistricts(state) {
+  const districtSelect = document.getElementById("district");
+  districtSelect.innerHTML = "<option value=''>Select District</option>";
+  
+  if (stateDistricts[state]) {
+    stateDistricts[state].forEach((district) => {
+      const option = document.createElement("option");
+      option.value = district;
+      option.text = district;
+      districtSelect.appendChild(option);
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('password');
+    const togglePasswordButton = document.getElementById('togglePassword');
+
+    togglePasswordButton.addEventListener('click', () => {
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+        togglePasswordButton.textContent = type === 'password' ? 'Show' : 'Hide';
+    });
+});
+
+</script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body-white border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="images/logo.png" alt="Brandlogo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto me-auto  mb-2 ">
+            <li class="nav-item">
+              <a class="nav-link tt" aria-current="page" href="#">Seller</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link tt" href="#">Buyer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link tt" href="#">Mandi Price</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link tt" href="#">Price</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle tt" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                More
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-4 mb-2">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Hindi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" Disabled>Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="d-flex ms-auto me-auto justify-content-center align-items-center mt-5">
+        <div style="border: solid;width: 40%;" class=" rounded d-flex justify-content-center">
+        <form action="reg.php" name="form" method="post">
+            <div class="mb-1">
+                <h2 style="text-align:center;font-size: 2rem;" class="mt-3 mb-4">Register</h2>
+                <div class="input-group">
+                <input type="text" class="form-control input-sm" id="name" name="fname" placeholder="First Name">
+                <input type="text" class="form-control input-sm" id="name"  name="lname" placeholder="Last Name">
+                </div>
+            </div>
+            <select class="form-select mt-4" aria-label="Default select example" name="state" onchange="getDistricts(this.value)">
+                <option selected>State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+
+              </select>
+              <select id="district" class="form-select mt-4" name="district">
+                <option value="">Select District</option>
+              </select>
+              <select class="form-select mt-4" aria-label="Default select example" name="role">
+                <option selected>Role</option>
+                <option value="Farmer">FARMER</option>
+                <option value="Buyer">BUYER</option>
+                <option value="Transport">TRANSPORT</option>
+              </select>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label"></label>
+              <input type="email" class="form-control" id="email" name="emm" aria-describedby="emailHelp" placeholder="Email address">
+            </div>
+            <div class="mb-3">
+                <label for="phoneNumber" class="form-label"></label>
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number" name="phn">
+            </div>
+
+            <!-- <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"></label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="showPassword">
+                    <label class="form-check-label" for="showPassword">Show Password</label>
+                </div>
+            </div> -->
+            <div class="row align-items-center">
+                <div class="col-sm-10">
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" name="pp">
+                </div>
+                <div class="col-sm-10">
+                    <input type="password" id="password" class="form-control" placeholder="Confirm password" name="cpp">
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" id="togglePassword" class="btn btn-secondary">Show</button>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-success mb-5" name="submit">Submit</button>
+        </form>
+        </div>
+    </div>
+  </main>
+
+
+<!-- footer -->
+
+<footer class="mt-5">
+    <div class="greenaccord-footer-container">
+        <div class="greenaccord-footer-left">
+            <div class="greenaccord-footer-logo">
+                <img src="images/logo.png" alt="GreenAccord Logo"> 
+            </div>
+            <p>Growing partnerships, securing futures––where trust meets opportunity in contract farming.</p>
+            <div class="greenaccord-social-icons">
+                <a href="#"><img src="images/twitter1.png" alt="Twitter"></a>
+                <a href="#"><img src="images/whatsapp.png" alt="WhatsApp"></a>
+                <a href="#"><img src="images/linkdin.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+        <div class="greenaccord-footer-right">
+            <div class="greenaccord-footer-column">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Services</a>
+                <a href="#">Career</a>
+            </div>
+            <div class="greenaccord-footer-column">
+                <a href="#">Blog</a>
+                <a href="#">FAQs</a>
+                <a href="#">Testimonial</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="greenaccord-footer-column">
+                <a href="#">Privacy</a>
+                <a href="#">Partners</a>
+            </div>
+        </div>
+    </div>
+    <div class="greenaccord-footer-bottom">
+        <p>© 2024 GreenAccord. All rights reserved.</p>
+    </div>
+<style>
+footer {
+background-color: #1a1a1a; /* Dark background color */
+color: #fff; /* White text color */
+padding: 40px 20px; /* Added padding for better spacing */
+font-family: Arial, sans-serif; /* Ensure consistent font usage */
+}
+
+.greenaccord-footer-container {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.greenaccord-footer-left {
+max-width: 300px;
+}
+
+.greenaccord-footer-logo img {
+width: 150px;
+margin-bottom: 10px;
+}
+
+.greenaccord-footer-left p {
+font-size: 14px;
+margin: 10px 0;
+line-height: 1.6;
+}
+
+.greenaccord-social-icons {
+margin-top: 20px; /* Increased margin for better spacing */
+}
+
+.greenaccord-social-icons a img {
+width: 24px;
+height: 24px;
+margin-right: 10px;
+transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.greenaccord-social-icons a img:hover {
+transform: scale(1.2); /* Increased hover scale for better effect */
+opacity: 0.8; /* Slight opacity change on hover */
+}
+
+.greenaccord-footer-right {
+display: flex;
+gap: 60px; /* Increased space between columns */
+}
+
+.greenaccord-footer-column {
+display: flex;
+flex-direction: column;
+}
+
+.greenaccord-footer-column a {
+color: #ccc;
+text-decoration: none;
+margin-bottom: 12px; /* Increased space between links */
+font-size: 15px; /* Slightly increased font size */
+padding: 5px 0; /* Added padding for clickable area */
+transition: color 0.3s ease, padding-left 0.3s ease; /* Added transition for padding */
+}
+
+.greenaccord-footer-column a:hover {
+color: #fff;
+padding-left: 5px; /* Indent link on hover for a subtle effect */
+}
+
+.greenaccord-footer-bottom {
+border-top: 1px solid #444;
+margin-top: 30px; /* Increased margin for spacing */
+padding-top: 20px; /* Increased padding for separation */
+text-align: center;
+}
+
+.greenaccord-footer-bottom p {
+font-size: 13px; /* Slightly increased font size for readability */
+color: #ccc;
+margin: 0;
+}
+
+
+  
+
+</style>
+</footer>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+</body>
