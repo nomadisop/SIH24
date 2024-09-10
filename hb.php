@@ -94,7 +94,8 @@ session_start();
                         <!-- Product Card -->
                          <?php
                          include 'connect.php';
-                         $sql="SELECT * FROM post WHERE status=0";
+                         $sql="SELECT u.state,u.district, p.title, p.content,p.type,p.weight,p.price,p.name FROM users AS u JOIN post AS p ON u.email= p.author";
+                       
                          $result= mysqli_query($conn,$sql);
                          while ($arr = mysqli_fetch_array($result)) {
                         $cat=$arr['type'];
@@ -103,6 +104,13 @@ session_start();
                         $p=$arr['price'];
                         $c=$arr['content'];
                         $loc=$arr['name'];
+                        $st=$arr['state'];
+                        $ds=$arr['district'];
+
+                       
+
+                        
+                        
                         ?>
                         <div class="col-md-4">
                         <div class="card mb-4">
@@ -113,6 +121,11 @@ session_start();
                                 <p class="card-text"><strong>Weight:</strong> <?php echo $w; ?> kg</p>
                                 <p class="card-text"><strong>Price per kg:</strong> <?php echo $p; ?>/- Rupees</p>
                                 <p class="card-text">This is an example description of the product. It provides details about the item.</p>
+                                <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                            </svg>
+                                          <?php echo $ds,',',$st; ?>
+                                          </p>
                                 <a href="#" class="btn btn-primary">Message</a>
                             </div>
                         </div>

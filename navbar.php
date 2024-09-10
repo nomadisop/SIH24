@@ -46,7 +46,19 @@
             <span><?php echo $_SESSION["username"]; ?></span>
         </a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="mp.php">My Posts</a></li>
+          <?php 
+            if($_SESSION['role']=='Farmer'){
+              $add='mp.php';
+            
+            }
+            elseif($_SESSION['role']=='Transport'){
+             $add='ht.php';
+            
+            }
+          
+          
+          ?>
+            <li><a class="dropdown-item" href="<?php echo $add;?>">My Posts</a></li>
             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             
         </ul>

@@ -33,23 +33,24 @@
         $sql="SELECT * FROM vehicles WHERE author='$em'";
                          $result= mysqli_query($conn,$sql);
                          while ($arr = mysqli_fetch_array($result)) {
-                            $cat=$arr['type'];
-                            $tt=$arr['title'];
-                            $w=$arr['weight'];
-                            $p=$arr['price'];
-                            $c=$arr['content'];
+                            $cat=$arr['truck_type'];
+                            $tt=$arr['author'];
+                            $w=$arr['capacity'];
+                            $p=$arr['vehicle_no'];
+                            $c=$arr['cpkm'];
+                            $loc=$arr['name'];
                             
                         ?>
                         <div class="col-md-4">
                             <div class="card mb-4">
-                                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Product Image">
+                                <img src="images/postimageFarmer/<?php echo $loc; ?>" class="card-img-top" alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $tt;?> </h5>
-                                    <p class="card-text"><strong></strong>Category:<?php echo $cat; echo $em;?></p>
-                                    <p class="card-text"><strong>Weight:</strong><?php echo $w; ?> kg</p>
-                                    <p class="card-text"><strong>Price per kg:</strong><?php echo $p; ?>/- Rupees</p>
-                                    <p class="card-text">This is an example description of the product. It provides details about the item.</p>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <p class="card-text"><strong></strong>Category:<?php echo $cat;?></p>
+                                    <p class="card-text"><strong>Capacity:</strong><?php echo $w; ?> kg</p>
+                                    <p class="card-text"><strong>Vehicle NO:</strong><?php echo $p; ?></p>
+                                    <p class="card-text">Cost per km: <?php echo $c;?> /- Rupees</p>
+                                    <a href="#" class="btn btn-primary">Edit</a>
                                 </div>
                             </div>
                         </div>
