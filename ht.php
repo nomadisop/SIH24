@@ -26,7 +26,7 @@
         <main>
 
         <div class="container mt-5">
-                    <h1 class="text-center mb-4">My Listing(s)</h1>
+                    <h1 class="text-center mb-4">My Vehicles</h1>
                     <div class="row">
 <?php
         $em=$_SESSION['email'];
@@ -57,6 +57,16 @@
 
                         <?php }
                          ?>
+                         <a
+                            name=""
+                            id=""
+                            class="btn btn-primary mb-5"
+                            href="htadd.php"
+                            role="button"
+                            >Add Vehicle
+                            </a
+                         >
+                         
 
 </div>
 </div>
