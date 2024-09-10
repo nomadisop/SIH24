@@ -24,7 +24,7 @@ if(isset($submit)){
             $_SESSION['cart']=array();
             
             if($_SESSION['role']=='Farmer'){
-                header("location: hf1.php");
+                header("location: mp.php");
             }
             elseif($_SESSION['role']=='Buyer'){
                 header("location:hb.php");

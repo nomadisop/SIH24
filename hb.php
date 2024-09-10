@@ -140,6 +140,7 @@ session_start();
         </main>
         <footer>
             <!-- place footer here -->
+             <?php include 'footer.php'; ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->
         <script

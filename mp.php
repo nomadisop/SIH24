@@ -53,7 +53,7 @@ session_start();
                                     <p class="card-text"><strong>Weight:</strong><?php echo $w; ?> kg</p>
                                     <p class="card-text"><strong>Price per kg:</strong><?php echo $p; ?>/- Rupees</p>
                                     <p class="card-text">This is an example description of the product. It provides details about the item.</p>
-                                    <a href="#" class="btn btn-primary">Message</a>
+                                    <a href="#" class="btn btn-primary">Edit</a>
                                 </div>
                             </div>
                         </div>
