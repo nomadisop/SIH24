@@ -60,6 +60,15 @@ session_start();
 
                         <?php }
                          ?>
+                         <a
+                            name=""
+                            id=""
+                            class="btn btn-primary mb-5"
+                            href="hf1.php"
+                            role="button"
+                            >Create Post
+                            </a
+                         >
 
 </div>
 </div>
