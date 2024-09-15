@@ -1,48 +1,46 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "role_based_login";
 
-include 'connect.php';
-$submit = $_POST['submit'];
-$flag=0;
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if(isset($submit)){
-    $uname=$_POST["uname"];
-    $pass=$_POST["pass"];
-    $sql="select * from users where email='$uname'";
-        $result=mysqli_query($conn,$sql);
-        $num=mysqli_num_rows($result);
-        $arr=mysqli_fetch_array($result);
-       
-        if(password_verify($pass,$arr['password'])){
-            $login=true;
-            session_start();
-            $b=$arr['email'];
-            $fname=$arr['fname'];
-            $_SESSION['role']=$arr['role'];
-            $_SESSION['email']=$b;
-            $_SESSION["loggedin"]=true;
-            $_SESSION["username"]=$fname;
-            $_SESSION['cart']=array();
-            
-            if($_SESSION['role']=='Farmer'){
-                header("location: mp.php");
-            }
-            elseif($_SESSION['role']=='Buyer'){
-                header("location:hb.php");
 
-            }
-            elseif($_SESSION['role']=='Transport'){
-                header("location:ht.php");
-            }   
-            
-        }
-
-        else{
-            echo "<script>alert('Invalid username or password. Please double-check your credentials and try again.');
-            window.history.back();</script>";
-        }
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
+$email = $_POST['email'];
+$password = $_POST['password']; 
 
 
+$sql = "SELECT * FROM users WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+
+    if (password_verify($password, $user['password'])) {
+    if ($user['role'] == 'buyer') {
+            header("Location: buyer_home.php");
+        } elseif ($user['role'] == 'seller') {
+            header("Location: seller_home.php");
+        } elseif ($user['role'] == 'transport') {
+            header("Location: transport_home.php");
+        }
+    } else {
+        echo "Invalid password!";
+    }
+} else {
+    echo "No user found with this email!";
+}
+
+
+$stmt->close();
+$conn->close();
 ?>
