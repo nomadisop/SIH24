@@ -60,7 +60,7 @@ $image_name = ""; //SEtting DEfault Value as blank
 
     $sql="INSERT INTO `post` (`id`, `type`, `title`, `author`, `price`, `weight`, `date`, `status`, `content`,`name`) VALUES (NULL, '$cat', '$pt', '$a', $p, $w, $currentDate, '0', '$cnt','$image_name')";
     $result= mysqli_query($conn,$sql);
-
+    header("location:mp.php");
 }
 
 
