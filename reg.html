@@ -13,7 +13,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    color: #581da6;
+    color: #e1b909;
 }
 
 
@@ -134,15 +134,68 @@ body::before {
 }
 </style>
 
-    <script>
+ 
        
-        const stateDistricts = {
-            'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Tirupati', 'Guntur'],
-            'Arunachal Pradesh': ['Itanagar', 'Naharlagun', 'Tawang', 'Ziro'],
-            'Assam': ['Guwahati', 'Dibrugarh', 'Jorhat', 'Silchar'],
-            'Bihar': ['Patna', 'Gaya', 'Bhagalpur', 'Muzzafarpur'],
-            'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Aurangabad', 'Ratnagiri'],
-        };
+
+
+   <script>
+    const stateDistricts = {
+    'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Tirupati', 'Guntur', 'Kurnool', 'Kadapa'],
+    'Arunachal Pradesh': ['Itanagar', 'Naharlagun', 'Tawang', 'Ziro', 'Pasighat', 'Roing'],
+    'Assam': ['Guwahati', 'Dibrugarh', 'Jorhat', 'Silchar', 'Tezpur', 'Bongaigaon'],
+    'Bihar': ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur', 'Darbhanga', 'Purnea'],
+    'Chhattisgarh': ['Raipur', 'Bilaspur', 'Durg', 'Korba', 'Jagdalpur', 'Rajnandgaon'],
+    'Goa': ['Panaji', 'Margao', 'Vasco da Gama', 'Mapusa', 'Ponda'],
+    'Gujarat': ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot', 'Bhavnagar', 'Jamnagar'],
+    'Haryana': ['Gurugram', 'Faridabad', 'Panchkula', 'Hisar', 'Ambala', 'Rohtak'],
+    'Himachal Pradesh': ['Shimla', 'Dharamshala', 'Mandi', 'Solan', 'Kullu', 'Chamba'],
+    'Jharkhand': ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro', 'Deoghar', 'Hazaribagh'],
+    'Karnataka': ['Bengaluru', 'Mysuru', 'Mangaluru', 'Hubli', 'Belgaum', 'Davanagere'],
+    'Kerala': ['Thiruvananthapuram', 'Kochi', 'Kozhikode', 'Kollam', 'Thrissur', 'Kannur'],
+    'Madhya Pradesh': ['Bhopal', 'Indore', 'Gwalior', 'Jabalpur', 'Ujjain', 'Sagar'],
+    'Maharashtra': ['Mumbai', 'Pune', 'Nagpur', 'Aurangabad', 'Ratnagiri', 'Nashik'],
+    'Manipur': ['Imphal', 'Thoubal', 'Bishnupur', 'Churachandpur', 'Kakching', 'Senapati'],
+    'Meghalaya': ['Shillong', 'Tura', 'Jowai', 'Nongpoh', 'Baghmara', 'Williamnagar'],
+    'Mizoram': ['Aizawl', 'Lunglei', 'Champhai', 'Kolasib', 'Serchhip', 'Lawngtlai'],
+    'Nagaland': ['Kohima', 'Dimapur', 'Mokokchung', 'Tuensang', 'Mon', 'Zunheboto'],
+    'Odisha': ['Bhubaneswar', 'Cuttack', 'Puri', 'Sambalpur', 'Rourkela', 'Balasore'],
+    'Punjab': ['Amritsar', 'Ludhiana', 'Jalandhar', 'Patiala', 'Bathinda', 'Mohali'],
+    'Rajasthan': ['Jaipur', 'Jodhpur', 'Udaipur', 'Kota', 'Ajmer', 'Bikaner'],
+    'Sikkim': ['Gangtok', 'Geyzing', 'Namchi', 'Mangan', 'Rangpo'],
+    'Tamil Nadu': ['Chennai', 'Coimbatore', 'Madurai', 'Tiruchirappalli', 'Salem', 'Erode'],
+    'Telangana': ['Hyderabad', 'Warangal', 'Nizamabad', 'Karimnagar', 'Khammam', 'Mahbubnagar'],
+    'Tripura': ['Agartala', 'Dharmanagar', 'Udaipur', 'Kailashahar', 'Ambassa'],
+    'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Varanasi', 'Agra', 'Meerut', 'Prayagraj'],
+    'Uttarakhand': ['Dehradun', 'Haridwar', 'Nainital', 'Almora', 'Pithoragarh', 'Haldwani'],
+    'West Bengal': ['Kolkata', 'Darjeeling', 'Siliguri', 'Howrah', 'Asansol', 'Durgapur'],
+    'Delhi': ['Central Delhi', 'North Delhi', 'South Delhi', 'East Delhi', 'West Delhi', 'New Delhi'],
+    'Jammu and Kashmir': ['Srinagar', 'Jammu', 'Anantnag', 'Baramulla', 'Udhampur', 'Poonch'],
+    'Ladakh': ['Leh', 'Kargil'],
+    'Puducherry': ['Puducherry', 'Karaikal', 'Mahe', 'Yanam'],
+    'Lakshadweep': ['Kavaratti', 'Agatti', 'Minicoy', 'Amini'],
+    'Andaman and Nicobar Islands': ['Port Blair', 'Nicobar', 'Havelock Island', 'Neil Island'],
+};
+
+
+function getDistricts(state) {
+    const districtSelect = document.getElementById("district");
+    districtSelect.innerHTML = "<option value=''>Select District</option>"; // Clear the previous options
+    if (stateDistricts[state]) {
+        stateDistricts[state].forEach(district => {
+            const option = document.createElement("option");
+            option.value = district;
+            option.text = district;
+            districtSelect.appendChild(option);
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const stateSelect = document.getElementById("state");
+    stateSelect.addEventListener('change', function () {
+        getDistricts(this.value);
+    });
+});
 
         
         function getDistricts(state) {
@@ -254,50 +307,83 @@ body::before {
 <body>
     <div class="registration-form">
         <h2 class="form-title">Register</h2>
-        <form onsubmit="validateForm(event)">
+        <form action="reg.php" method="POST">
             <div>
                 <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name">
+                <input type="text" class="form-control" id="firstName" name="fname" placeholder="First Name" required>
             </div>
             <div>
                 <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name">
+                <input type="text" class="form-control" id="lastName" name="lname" placeholder="Last Name" required>
             </div>
+        
+            
+            
+            
+        
             <div>
                 <label for="state">State</label>
-                <select class="form-select" id="state" name="state" onchange="getDistricts(this.value)">
+                <select class="form-select" id="state" name="state" required onchange="getDistricts(this.value)">
                     <option value="">Select State</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                     <option value="Assam">Assam</option>
                     <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
                     <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Ladakh">Ladakh</option>
+                    <option value="Puducherry">Puducherry</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                 </select>
             </div>
+            
             <div>
                 <label for="district">District</label>
-                <select class="form-select" id="district" name="district">
+                <select class="form-select" id="district" name="district" required>
                     <option value="">Select District</option>
                 </select>
             </div>
+            
             <div>
                 <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             </div>
             <div>
                 <label for="phone">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number" required>
             </div>
             <div>
                 <label for="password">Password</label>
-                <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    <span class="toggle-password" id="togglePassword">Show</span>
-                </div>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             </div>
             <div>
                 <label for="role">Role</label>
-                <select class="form-select" id="role" name="role">
+                <select class="form-select" id="role" name="role" required>
                     <option value="">Select Role</option>
                     <option value="Buyer">Buyer</option>
                     <option value="Seller">Seller</option>
@@ -308,5 +394,6 @@ body::before {
         </form>
     </div>
 </body>
+
 
 </html>
