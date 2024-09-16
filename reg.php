@@ -25,7 +25,7 @@ $sql = "INSERT INTO users (fname, lname, email, phone, password, state, district
         VALUES ('$first_name', '$last_name', '$email', '$phone', '$password_hashed', '$state', '$district', '$role')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    header("location:login.html");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

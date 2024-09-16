@@ -1,46 +1,51 @@
-<?
-include 'connect.php';
-$submit = $_POST['submit'];
-$flag=0;
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "greenaccord";
 
-if(isset($submit)){
-    $uname=$_POST["uname"];
-    $pass=$_POST["pass"];
-    $sql="select * from users where email='$uname'";
-        $result=mysqli_query($conn,$sql);
-        $num=mysqli_num_rows($result);
-        $arr=mysqli_fetch_array($result);
-       
-        if(password_verify($pass,$arr['password'])){
-            $login=true;
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+$email = $_POST['email'];
+$password = $_POST['pass']; 
+
+
+$sql = "SELECT * FROM users WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+
+    if (password_verify($password, $user['password'])) {
             session_start();
-            $b=$arr['email'];
-            $fname=$arr['fname'];
-            $_SESSION['role']=$arr['role'];
+            $b=$user['email'];
+            $fname=$user['fname'];
+            $_SESSION['role']=$user['role'];
             $_SESSION['email']=$b;
             $_SESSION["loggedin"]=true;
             $_SESSION["username"]=$fname;
-            $_SESSION['cart']=array();
-            
-            if($_SESSION['role']=='Farmer'){
-                header("location: mp.php");
-            }
-            elseif($_SESSION['role']=='Buyer'){
-                header("location:hb.php");
-
-            }
-            elseif($_SESSION['role']=='Transport'){
-                header("location:ht.php");
-            }   
-            
+    if ($user['role'] == 'Buyer') {
+            header("Location: hb.php");
+        } elseif ($user['role'] == 'Farmer') {
+            header("Location: mp.php");
+        } elseif ($user['role'] == 'Transport') {
+            header("Location: ht.php");
         }
+    } else {
+        echo "Invalid password!";
     }
+} else {
+    echo "No user found with this email!";
+}
 
-
-
-        else{
-            echo "<script>alert('Invalid username or password. Please double-check your credentials and try again.');
-            window.history.back();</script>";
-        }
-
-        ?>
+$stmt->close();
+$conn->close();
+?>
