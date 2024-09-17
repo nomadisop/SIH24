@@ -90,10 +90,71 @@ session_start();
         <main>
                 <div class="container mt-5">
                     <h1 class="text-center mb-4">Product Listing</h1>
+                    <form method="GET" action="hb.php">
+    <select name="category" class="form-control">
+        <?php
+        include 'connect.php';
+        $sql2 ="SELECT * FROM categories";
+        $result2= mysqli_query($conn,$sql2);
+        while ($arr = mysqli_fetch_array($result2)) {
+            echo "<option value='".$arr['category_name']."'>".$arr['category_name']."</option>";
+        }?>
+        <button type="submit" name="submit" value="Submit" class="btn btn-default">SEARCH</button>
+        
+    </select>
+    <button type="submit" name="submit" value="Submit" class="btn btn-default">SEARCH</button>
+</form>
                     <div class="row">
                         <!-- Product Card -->
                          <?php
-                         include 'connect.php';
+                         function displayPostsByCategory($conn, $selectedCategory) {
+                          // Prepare the SQL query
+                          $ct=$_GET['category'];
+                          $queryString ="SELECT u.state,u.district, p.title, p.content,p.type,p.weight,p.price,p.name FROM users AS u JOIN post AS p ON u.email= p.author where p.type='$ct'";
+                       
+                          $result= mysqli_query($conn,$queryString);
+                          while ($arr = mysqli_fetch_array($result)) {
+                         $cat=$arr['type'];
+                         $tt=$arr['title'];
+                         $w=$arr['weight'];
+                         $p=$arr['price'];
+                         $c=$arr['content'];
+                         $loc=$arr['name'];
+                         $st=$arr['state'];
+                         $ds=$arr['district'];
+                      
+                          // Prepare statement
+
+                          
+                          
+                        
+                          // Check if there are results and display them
+                          if (mysqli_num_rows($result) > 0) {?>
+                            <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img src="images/postimageFarmer/<?php echo $loc; ?>" class="card-img-top product-image" alt="Product Image">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $tt; ?></h5>
+                                    <p class="card-text"><strong>Category:</strong> <?php echo $cat; ?></p>
+                                    <p class="card-text"><strong>Weight:</strong> <?php echo $w; ?> kg</p>
+                                    <p class="card-text"><strong>Price per kg:</strong> <?php echo $p; ?>/- Rupees</p>
+                                    <p class="card-text"><?php echo $c; ?></p>
+                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                                  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                                </svg>
+                                              <?php echo $ds,',',$st; ?>
+                                              </p>
+                                    <a href="#" class="btn btn-primary">Message</a>
+                                </div>
+                            </div>
+                        </div><?php
+                              
+                          } else {
+                              echo "<p>No posts found for this category.</p>";
+                          }
+                      
+                      }}
+                         function displayAllPosts($conn) {
                          $sql="SELECT u.state,u.district, p.title, p.content,p.type,p.weight,p.price,p.name FROM users AS u JOIN post AS p ON u.email= p.author";
                        
                          $result= mysqli_query($conn,$sql);
@@ -106,12 +167,7 @@ session_start();
                         $loc=$arr['name'];
                         $st=$arr['state'];
                         $ds=$arr['district'];
-
-                       
-
-                        
-                        
-                        ?>
+                          ?>
                         <div class="col-md-4">
                         <div class="card mb-4">
                             <img src="images/postimageFarmer/<?php echo $loc; ?>" class="card-img-top product-image" alt="Product Image">
@@ -131,8 +187,17 @@ session_start();
                         </div>
                     </div>
 
-                        <?php }
-                         ?>
+                        <?php }}
+                        if (isset($_GET['category'])) {
+                          $selectedCategory = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_NUMBER_INT);
+                          displayPostsByCategory($conn, $selectedCategory);
+                      } else {
+                          displayAllPosts($conn);
+                      }
+                      
+                      // Close the database connection if it's no longer needed
+                      mysqli_close($conn);
+                      ?>
                                              
                     </div>
                 </div>

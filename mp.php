@@ -31,6 +31,7 @@ session_start();
         <main>
         <div class="container mt-5">
                     <h1 class="text-center mb-4">My Listing(s)</h1>
+                    
                     <div class="row">
 <?php
         $em=$_SESSION['email'];
@@ -44,19 +45,6 @@ session_start();
                             $c=$arr['content'];
                             $loc=$arr['name'];
                         ?>
-                        <!-- <div class="col-md-4">
-                            <div class="card mb-4">
-                                <img src="images/postimageFarmer/<?php echo $loc; ?>" class="card-img-top" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo $tt;?> </h5>
-                                    <p class="card-text"><strong></strong>Category:<?php echo $cat;?></p>
-                                    <p class="card-text"><strong>Weight:</strong><?php echo $w; ?> kg</p>
-                                    <p class="card-text"><strong>Price per kg:</strong><?php echo $p; ?>/- Rupees</p>
-                                    <p class="card-text"><?php echo $c; ?></p>
-                                    <a href="#" class="btn btn-primary">Edit</a>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-md-4">
                         <div class="card mb-4">
                             <img src="images/postimageFarmer/<?php echo $loc; ?>" class="card-img-top" alt="Product Image">
