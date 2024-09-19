@@ -92,10 +92,12 @@ session_start();
                     <h1 class="text-center mb-4">Product Listing</h1>
                     <form method="GET" action="hb.php">
     <select name="category" class="form-control">
+        <option value="no">Category</option>
         <?php
         include 'connect.php';
         $sql2 ="SELECT * FROM categories";
         $result2= mysqli_query($conn,$sql2);
+        
         while ($arr = mysqli_fetch_array($result2)) {
             echo "<option value='".$arr['category_name']."'>".$arr['category_name']."</option>";
         }?>
@@ -108,7 +110,7 @@ session_start();
                         <!-- Product Card -->
                          <?php
                          function displayPostsByCategory($conn, $selectedCategory) {
-                          // Prepare the SQL query
+                          
                           $ct=$_GET['category'];
                           $queryString ="SELECT u.state,u.district, p.title, p.content,p.type,p.weight,p.price,p.name FROM users AS u JOIN post AS p ON u.email= p.author where p.type='$ct'";
                        
@@ -123,12 +125,7 @@ session_start();
                          $st=$arr['state'];
                          $ds=$arr['district'];
                       
-                          // Prepare statement
-
-                          
-                          
                         
-                          // Check if there are results and display them
                           if (mysqli_num_rows($result) > 0) {?>
                             <div class="col-md-4">
                             <div class="card mb-4">
@@ -144,7 +141,7 @@ session_start();
                                                 </svg>
                                               <?php echo $ds,',',$st; ?>
                                               </p>
-                                    <a href="#" class="btn btn-primary">Message</a>
+                                    <a href="chat.php" class="btn btn-primary">Message</a>
                                 </div>
                             </div>
                         </div><?php
@@ -155,7 +152,7 @@ session_start();
                       
                       }}
                          function displayAllPosts($conn) {
-                         $sql="SELECT u.state,u.district, p.title, p.content,p.type,p.weight,p.price,p.name FROM users AS u JOIN post AS p ON u.email= p.author";
+                         $sql="SELECT u.state,u.district, p.title, p.content,p.type,p.weight,p.price,p.name,u.id FROM users AS u JOIN post AS p ON u.email= p.author";
                        
                          $result= mysqli_query($conn,$sql);
                          while ($arr = mysqli_fetch_array($result)) {
@@ -167,6 +164,7 @@ session_start();
                         $loc=$arr['name'];
                         $st=$arr['state'];
                         $ds=$arr['district'];
+                        $id=$arr['id'];
                           ?>
                         <div class="col-md-4">
                         <div class="card mb-4">
@@ -182,7 +180,7 @@ session_start();
                                             </svg>
                                           <?php echo $ds,',',$st; ?>
                                           </p>
-                                <a href="#" class="btn btn-primary">Message</a>
+                                <a href="chat.php?id=<?php echo $id; ?>" class="btn btn-primary">Message</a>
                             </div>
                         </div>
                     </div>

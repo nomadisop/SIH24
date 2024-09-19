@@ -44,6 +44,7 @@ session_start();
                             $p=$arr['price'];
                             $c=$arr['content'];
                             $loc=$arr['name'];
+                            $i=$arr['id'];
                         ?>
                         <div class="col-md-4">
                         <div class="card mb-4">
@@ -54,7 +55,7 @@ session_start();
                                 <p class="card-text"><strong>Weight:</strong><?php echo $w; ?> kg</p>
                                 <p class="card-text"><strong>Price per kg:</strong><?php echo $p; ?>/- Rupees</p>
                                 <p class="card-text"><?php echo $c; ?></p>
-                                <a href="#" class="btn btn-primary">Edit</a>
+                                <a href="edit.php?id=<?php echo $i; ?>" class="btn btn-primary">Edit</a>
                             </div>
                         </div>
                     </div>

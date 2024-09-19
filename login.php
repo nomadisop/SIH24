@@ -27,11 +27,13 @@ if ($result->num_rows > 0) {
     if (password_verify($password, $user['password'])) {
             session_start();
             $b=$user['email'];
+            $id=$user['id'];
             $fname=$user['fname'];
             $_SESSION['role']=$user['role'];
             $_SESSION['email']=$b;
             $_SESSION["loggedin"]=true;
             $_SESSION["username"]=$fname;
+            $_SESSION['user_id']=$id;
     if ($user['role'] == 'Buyer') {
             header("Location: hb.php");
         } elseif ($user['role'] == 'Farmer') {

@@ -1,6 +1,30 @@
 <?php include 'connect.php'; ?>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi,mr',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
 
+    function translate() {
+        var language = document.getElementById("languageSelect").value;
+        if (language) {
+            var googleTranslateElement = new google.translate.TranslateElement();
+            googleTranslateElement.translatePage(language);
+        } else {
+            alert("Please select a language.");
+        }
+    }
 
+  function addGoogleTranslateScript() {
+      var gtScript = document.createElement('script');
+      gtScript.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.body.appendChild(gtScript);
+  }
+  addGoogleTranslateScript();
+</script>
 <nav class="navbar navbar-expand-lg bg-body-white border-bottom">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#"><img src="images/logo.png" alt="Brandlogo"></a>
@@ -39,7 +63,7 @@
                     </ul>
                     <ul class="navbar-nav ms-3 mb-2">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Hindi</a>
+        <div id="google_translate_element"></div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,6 +83,7 @@
           
           ?>
             <li><a class="dropdown-item" href="<?php echo $add;?>">My Posts</a></li>
+            <li><a href="mychats.php" class="dropdown-item">My Chats</a></li>
             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             
         </ul>
