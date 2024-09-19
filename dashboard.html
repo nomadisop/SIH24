@@ -1,0 +1,180 @@
+    <!-- if chaiye to php navbar session add karde -->
+     <!-- and neeche ka nav hata de -->
+
+
+<html lang="en">
+<head>
+    <title>Contract Status Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 16px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+      
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #5A8A23;
+            margin-top: 1.5rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #708238;
+            margin-bottom: 2rem;
+        }
+
+        .ongoing {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        
+        .table-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 1000px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #5A8A23;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 1rem;
+        }
+
+    
+        .status-yes {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-no {
+            color: red;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            font-style: italic;
+            color: orange;
+        }
+
+        .status-active {
+            font-style: italic;
+            color: #5A8A23;
+        }
+    </style>
+</head>
+<body>
+
+   
+    <div class="navbar">
+        <div class="navbar-menu">
+            <a href="#">Seller</a>
+            <a href="#">Buyer</a>
+            <a href="#">Mandi Price</a>
+            <a href="#">Price</a>
+            <div class="dropdown">
+                <a href="#">More</a>
+            </div>
+        </div>
+    </div>
+
+  
+    <h1>Contract Status</h1>
+    <h2>Dashboard For Farmers</h2>
+
+  
+    <p class="ongoing">Ongoing Contract</p>
+
+   
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Contract ID</th>
+                    <th>Contract Name</th>
+                    <th>Signed By Farmer</th>
+                    <th>Signed By Buyer</th>
+                    <th>Status</th>
+                    <th>Expiry Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1267</td>
+                    <td>Apple Deal</td>
+                    <td class="status-yes">Yes</td>
+                    <td class="status-yes">Yes</td>
+                    <td class="status-active">Active</td>
+                    <td>20-12-24</td>
+                </tr>
+                <tr>
+                    <td>1567</td>
+                    <td>Wheat Deal</td>
+                    <td class="status-yes">Yes</td>
+                    <td class="status-no">No</td>
+                    <td class="status-pending">Pending</td>
+                    <td>10-12-25</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
